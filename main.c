@@ -27,9 +27,9 @@ int main() {
         } else if (opcao == 4) { //caso o usuario digite "4", a funcao de alterar tarefa é chamada
             alterarTarefa(&lt);
         } else if (opcao == 5) { //caso o usuario digite "5", a funcao de filtrar tarefas por prioridade é chamada
-            // filtrarTarefasPorPrioridade(&lt);
+            filtrarTarefasPorPrioridade(&lt);
         } else if (opcao == 6) { //caso o usuario digite "6", a funcao de filtrar tarefas por estado é chamada
-            // filtrarTarefasPorEstado(&lt);
+            filtrarTarefasPorEstado(&lt);
         } else if (opcao == 7) { //caso o usuario digite "7", a funcao de filtrar tarefas por categoria é chamada
             // filtrarTarefasPorCategoria(lt);
         } else if (opcao == 8) { //caso o usuario digite "8", a funcao de filtrar tarefas por prioridade e categoria é chamada
