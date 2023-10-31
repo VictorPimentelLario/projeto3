@@ -15,6 +15,10 @@ int criarTarefa(ListadeTarefas *lt) {
     printf("\nDescricao da Tarefa: ");
     fgets(lt->t[lt->qtd].descricao, 300, stdin);//escanea a descricao que o usuario digitou
     lt->t[lt->qtd].descricao[strcspn(lt->t[lt->qtd].descricao, "\n")] = '\0'; //substitui o "\n" no final da sentenca por um "\0"
+  printf("\nQual o Estado (1 = Completo ; 2 = Em Andamento ; 3 = Nao Iniciado): ");
+  scanf("%d", &lt->t[lt->qtd].estado); //escanea o estado que o usuario digitou
+  
+    lt->t[lt->qtd].numero = lt->qtd + 1;
     lt->qtd = lt->qtd + 1; //aumenta em 1 a quantidade de tarefas na lista
     return 0;
 }
@@ -48,12 +52,75 @@ int listarTarefas(ListadeTarefas lt) {
         printf("Prioridade: %d\n", lt.t[i].prioridade);
         printf("Categoria: %s\n", lt.t[i].categoria);
         printf("Descricao: %s\n", lt.t[i].descricao);
+        if (lt.t[i].estado == 1){
+          printf("Estado: Completo\n");
+        }
+        else if (lt.t[i].estado == 2){
+          printf("Estado: Em Andamento\n");
+        }
+        else if (lt.t[i].estado == 3){
+          printf("Estado: Nao Iniciado\n");
+        }
     }
     return 0;
 }
 
+int buscaTarefa(ListadeTarefas lt, int lembreteNumero){ // funcao de buscar a tarefa a partir do seu numero
+  int index = 0;
+  for (index; index < 100; index++){ // percorre por toda a lista de tarefas ate achar o numero digitado
+    if (lt.t[index].numero == lembreteNumero){
+    return index; // retorna o index da tarefa
+    }  
+  }
+  return -1; // caso nao encontre, retorna -1
+  }
+
+int alterarTarefa(ListadeTarefas *lt) {
+  // Altera um campo de uma tarefa na lista de tarefas.
+  int lembreteNumero;
+  printf("\nAlterar tarefa\n");
+  
+  printf("\nDigite o numero da tarefa: ");
+  scanf("%d", &lembreteNumero);
+  int index = buscaTarefa(*lt, lembreteNumero);
+  // if (index < 1 || index > lt->qtd) {
+  //     printf("\nNumero invalido!\n");
+  //     return 0;
+  // }
+
+  int opcao;
+  printf("\nQual campo deseja alterar?\n[1] Prioridade\n[2] Descricao\n[3] Categoria\n[4] Estado\nOpcao: ");
+  scanf("%d", &opcao);
+
+  switch (opcao) {
+      case 1:
+          printf("\nNova prioridade: ");
+          scanf("%d", &lt->t[index].prioridade);
+          printf("\nPrioridade alterada com sucesso!\n");
+          break;
+      case 2:
+          printf("\nNova descricao: ");
+          int c;
+          while ((c = getchar()) != '\n' && c != EOF) { } //limpa o buffer
+          fgets(lt->t[index].descricao, 300, stdin);
+          lt->t[index].descricao[strcspn(lt->t[index].descricao, "\n")] = '\0';
+          printf("\nDescrição alterada com sucesso!\n");
+          break;
+      case 3:
+          while ((c = getchar()) != '\n' && c != EOF) { } //limpa o buffer
+          printf("\nNova categoria: ");
+          fgets(lt->t[index].categoria, 100, stdin); //escanea a categoria que o usuario digitou
+          lt->t[index].categoria[strcspn(lt->t[index].categoria, "\n")] = '\0'; //substitui o "\n" no final da sentenca por um "\0"
+          printf("\nCategoria alterada com sucesso!\n");
+      case 4:
+          printf("\nNovo estado: ");
+          scanf("%d", &lt->t[index].estado);
+          printf("\nEstado alterado com sucesso!\n");
+          break;
+  }
+}
 void printMenu() { //imprime o menu com as opcoes
-    printf("\nMenu:\n[1] Criar Tarefa\n[2] Deletar Tarefe\n[3] Listar Tarefas\nEscolha uma opcao: ");
+    printf("\nMenu:\n[1] Criar Tarefa\n[2] Deletar Tarefa\n[3] Listar Tarefas\n[4] Alterar Tarefa\n[5] Filtrar Tarefas Por Prioridade\n[6] Filtrar Tarefas Por Estado\n[7] Filtrar Tarefas Por Categoria\n[8] Filtrar Tarefas Por Prioridade E Categoria\n[9] Exportar Tarefas Por Prioridade\n[10] Exportar Tarefas Por Categoria\n[11] Exportar Tarefas Por Prioridade E Categoria\nEscolha uma opcao: ");
 }
 
 int salvarLista(ListadeTarefas lt, char arquivo[]){
