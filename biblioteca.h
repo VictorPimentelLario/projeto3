@@ -26,5 +26,9 @@ int carregarLista(ListadeTarefas *lt, char nome[]);//funcao de carregar a lista 
 
 int alterarTarefa(ListadeTarefas *lt);//funcao de alterar as tarefas
 
+int filtrarTarefasPorPrioridade(ListadeTarefas *lt);
+
+int filtrarTarefasPorEstado(ListadeTarefas *lt);
+
 
 #endif //PROJETO_1_BIBLIOTECA_H

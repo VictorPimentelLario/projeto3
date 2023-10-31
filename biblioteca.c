@@ -119,6 +119,41 @@ int alterarTarefa(ListadeTarefas *lt) {
           break;
   }
 }
+
+int filtrarTarefasPorPrioridade(ListadeTarefas *lt){  // Filtra as tarefas por prioridade.
+  int prioridade;
+  printf("\nFiltra tarefas por prioridade\n");
+  printf("\nDigite a prioridade: ");
+  scanf("%d", &prioridade);
+  printf("\nTarefas com prioridade %d:\n", prioridade);
+  for (int i = 0; i < lt->qtd; i++){
+    if (lt->t[i].prioridade == prioridade){
+      printf("\nLembrete %d:\n", i + 1);
+      printf("Prioridade: %d\n", lt->t[i].prioridade);
+      printf("Categoria: %s\n", lt->t[i].categoria);
+      printf("Descricao: %s\n", lt->t[i].descricao);
+      printf("Estado: %s\n", lt->t[i].estado);
+    }
+  }  
+}
+
+int filtrarTarefasPorEstado(ListadeTarefas *lt){// Filtra as tarefas por estado.
+  int estado;
+  printf("\nFiltra tarefas por estado\n");
+  printf("\nDigite o estado (1 = Completo ; 2 = Em Andamento ; 3 = Nao Iniciado): ");
+  scanf("%d", &estado);
+  printf("\nTarefas com estado %d:\n", estado);
+  for (int i = 0; i < lt->qtd; i++){
+    if (lt->t[i].estado == estado){
+      printf("\nLembrete %d:\n", i + 1);
+      printf("Prioridade: %d\n", lt->t[i].prioridade);
+      printf("Categoria: %s\n", lt->t[i].categoria);
+      printf("Descricao: %s\n", lt->t[i].descricao);
+      printf("Estado: %d\n", lt->t[i].estado);
+    }
+  }    
+}
+
 void printMenu() { //imprime o menu com as opcoes
     printf("\nMenu:\n[1] Criar Tarefa\n[2] Deletar Tarefa\n[3] Listar Tarefas\n[4] Alterar Tarefa\n[5] Filtrar Tarefas Por Prioridade\n[6] Filtrar Tarefas Por Estado\n[7] Filtrar Tarefas Por Categoria\n[8] Filtrar Tarefas Por Prioridade E Categoria\n[9] Exportar Tarefas Por Prioridade\n[10] Exportar Tarefas Por Categoria\n[11] Exportar Tarefas Por Prioridade E Categoria\nEscolha uma opcao: ");
 }
