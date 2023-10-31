@@ -5,6 +5,8 @@ typedef struct tarefa { //struct com as variaveis para cada tarefa
     int prioridade; //variavel para armazenar o conteudo relacionado a prioridade
     char descricao[300]; //variavel para armazenar o conteudo relacionado a descricao
     char categoria[100]; //variavel para armazenar o conteudo relacionado a categoria
+    int estado;//variavel para armazenar o conteudo relacionado a estado
+    int numero;
 } Tarefa;
 
 typedef struct { //struct com a lista de tarefas
@@ -22,6 +24,7 @@ int salvarLista(ListadeTarefas lt, char nome[]);//funcao de salvar a lista de ta
 
 int carregarLista(ListadeTarefas *lt, char nome[]);//funcao de carregar a lista de tarefas
 
+int alterarTarefa(ListadeTarefas *lt);//funcao de alterar as tarefas
+
 
 #endif //PROJETO_1_BIBLIOTECA_H
-1
