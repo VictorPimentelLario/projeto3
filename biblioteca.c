@@ -154,24 +154,35 @@ int filtrarTarefasPorEstado(ListadeTarefas *lt){// Filtra as tarefas por estado.
   }    
 }
 
-int filtrarTarefasPorCategoria(ListadeTarefas *lt){
-  char categoria[100];
-  printf("\nFiltra tarefas por categoria\n");
-  printf("\nDigite a categoria: ");
+int filtrarTarefasPorCategoria(ListadeTarefas lt){
+  printf("\nFiltra tarefas por Categoria\n");
   int c;
-  while ((c = getchar()) != '\n' && c != EOF) { } //limpa
+  char categoria[100];
+  while ((c = getchar()) != '\n' && c != EOF) {}
+  printf("\nDigite a categoria: ");
   fgets(categoria, 100, stdin);
   categoria[strcspn(categoria, "\n")] = '\0';
-  printf("\nTarefas com categoria %s:\n", categoria);
-  for (int i = 0; i < lt->qtd; i++){
-    if (strcmp(lt->t[i].categoria, categoria) == 0){
-      printf("\nLembrete %d:\n", i + 1);
-      printf("Prioridade: %d\n", lt->t[i].prioridade);
-      printf("Categoria: %s\n", lt->t[i].categoria);
-      printf("Descricao: %s\n", lt->t[i].descricao);
-      printf("Estado: %d\n", lt->t[i].estado);
+  for (int i = 0; i < lt.qtd; i++) {
+    for (int j = 10; j > -1; j--){
+      int CategoriaVerificar = strcmp(lt.t[i].categoria, categoria);
+      if (CategoriaVerificar == 0){
+        if (lt.t[i].prioridade == j){
+          printf("\nLembrete %d:\n", lt.t[i].numero);
+          printf("Prioridade: %d\n", lt.t[i].prioridade);
+          printf("Categoria: %s\n", lt.t[i].categoria);
+          printf("Descricao: %s\n", lt.t[i].descricao);
+          if (lt.t[i].estado == 1) { // caso o estado seja igual a 1, mostra o estado como completo
+            printf("Estado: Completo\n");
+          } else if (lt.t[i].estado == 2) { // caso o estado seja igual a 2, mostra o estado como em andamento
+            printf("Estado: Em andamento\n");
+          } else if (lt.t[i].estado == 3) { // caso o estado seja igual a 3, mostra o estado como nao iniciado
+            printf("Estado: Nao iniciado\n");
+          }
+        }
+      }
     }
   }
+  return 0;
 }
 
 int filtrarTarefasPorPrioridadeECategoria(ListadeTarefas *lt){
@@ -182,7 +193,7 @@ int filtrarTarefasPorPrioridadeECategoria(ListadeTarefas *lt){
   printf("\nDigite a categoria: ");
   char categoria[100];
   int c;
-  while ((c = getchar()) != '\n' && c != EOF) { } //limpa
+  while ((c = getchar()) != '\n' && c != EOF) { } //limpa o buffer
   fgets(categoria, 100, stdin);
   categoria[strcspn(categoria, "\n")] = '\0';
   printf("\nTarefas com prioridade %d e categoria %s:\n", prioridade,
@@ -196,7 +207,7 @@ int filtrarTarefasPorPrioridadeECategoria(ListadeTarefas *lt){
       printf("Estado: %d\n", lt->t[i].estado);
     }
   }      
-}
+} 
 
 void printMenu() { //imprime o menu com as opcoes
     printf("\nMenu:\n[1] Criar Tarefa\n[2] Deletar Tarefa\n[3] Listar Tarefas\n[4] Alterar Tarefa\n[5] Filtrar Tarefas Por Prioridade\n[6] Filtrar Tarefas Por Estado\n[7] Filtrar Tarefas Por Categoria\n[8] Filtrar Tarefas Por Prioridade E Categoria\n[9] Exportar Tarefas Por Prioridade\n[10] Exportar Tarefas Por Categoria\n[11] Exportar Tarefas Por Prioridade E Categoria\nEscolha uma opcao: ");
