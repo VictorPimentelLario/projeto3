@@ -30,5 +30,9 @@ int filtrarTarefasPorPrioridade(ListadeTarefas *lt);
 
 int filtrarTarefasPorEstado(ListadeTarefas *lt);
 
+int filtrarTarefasPorCategoria(ListadeTarefas *lt);
+
+int filtrarTarefasPorPrioridadeECategoria(ListadeTarefas *lt);
+
 
 #endif //PROJETO_1_BIBLIOTECA_H
