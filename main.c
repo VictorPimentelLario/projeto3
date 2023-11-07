@@ -35,11 +35,11 @@ int main() {
         } else if (opcao == 8) { //caso o usuario digite "8", a funcao de filtrar tarefas por prioridade e categoria é chamada
             filtrarTarefasPorPrioridadeECategoria(&lt);
         } else if (opcao == 9) { //caso o usuario digite "9", a funcao de exportar tarefas por prioridade é chamada
-            // exportarTarefasPorPrioridade(&lt);
+            exportarTarefasPorPrioridade(&lt);
         } else if (opcao == 10) { //caso o usuario digite "10", a funcao de exportar tarefas por categoria é chamada
-            // exportarTarefasPorCategoria(&lt);
+            exportarTarefasPorCategoria(&lt);
         } else if (opcao == 11) { //caso o usuario digite "11", a funcao de exportar tarefas por prioridade e categoria é chamada
-            // exportarTarefasPorPrioridadeECategoria(&lt);
+            exportarTarefasPorPrioridadeECategoria(&lt);
         }
         else { //caso o usuario digite qualquer outro numero, o loop é reiniciado e imprime a mensagem de opcao inexistemte
             printf("Opcao nao existente!\n");

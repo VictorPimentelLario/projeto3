@@ -34,5 +34,11 @@ int filtrarTarefasPorCategoria(ListadeTarefas lt);
 
 int filtrarTarefasPorPrioridadeECategoria(ListadeTarefas *lt);
 
+int exportarTarefasPorPrioridade(ListadeTarefas *lt);
+
+int exportarTarefasPorCategoria(ListadeTarefas *lt);
+
+int exportarTarefasPorPrioridadeECategoria(ListadeTarefas *lt);
+
 
 #endif //PROJETO_1_BIBLIOTECA_H
