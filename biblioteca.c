@@ -118,6 +118,7 @@ int alterarTarefa(ListadeTarefas *lt) {
           printf("\nEstado alterado com sucesso!\n");
           break;
   }
+  return 0;
 }
 
 int filtrarTarefasPorPrioridade(ListadeTarefas *lt){  // Filtra as tarefas por prioridade.
@@ -132,7 +133,7 @@ int filtrarTarefasPorPrioridade(ListadeTarefas *lt){  // Filtra as tarefas por p
       printf("Prioridade: %d\n", lt->t[i].prioridade);
       printf("Categoria: %s\n", lt->t[i].categoria);
       printf("Descricao: %s\n", lt->t[i].descricao);
-      printf("Estado: %s\n", lt->t[i].estado);
+      printf("Estado: %d\n", lt->t[i].estado);
     }
   }  
 }
@@ -206,8 +207,75 @@ int filtrarTarefasPorPrioridadeECategoria(ListadeTarefas *lt){
       printf("Descricao: %s\n", lt->t[i].descricao);
       printf("Estado: %d\n", lt->t[i].estado);
     }
-  }      
-} 
+  }
+  return 0;
+}
+
+int exportarTarefasPorPrioridade(ListadeTarefas *lt) {
+  FILE *f = fopen("exportar.txt", "w");
+  printf("\nExportar tarefas por prioridade\n");
+  int prioridade;
+  printf("\nDigite a prioridade: ");
+  scanf("%d", &prioridade);
+  for (int i = 0; i < lt->qtd; i++) {
+    if (lt->t[i].prioridade == prioridade) {
+      fprintf(f, "\nLembrete %d:\n", i + 1);
+      fprintf(f, "Prioridade: %d\n", lt->t[i].prioridade);
+      fprintf(f, "Categoria: %s\n", lt->t[i].categoria);
+      fprintf(f, "Descricao: %s\n", lt->t[i].descricao);
+      fprintf(f, "Estado: %d\n", lt->t[i].estado);
+    }
+  }
+  fclose(f);
+  return 0;
+}
+
+int exportarTarefasPorCategoria(ListadeTarefas *lt){
+  FILE *f = fopen("exportar.txt", "w");
+  printf("\nExportar tarefas por categoria\n");
+  char categoria[100];
+  printf("\nDigite a categoria: ");
+  int c;
+  while ((c = getchar()) != '\n' && c != EOF) { } //limpa o buffer
+  fgets(categoria, 100, stdin);
+  categoria[strcspn(categoria, "\n")] = '\0';
+  for (int i = 0; i < lt->qtd; i++) {
+    if (strcmp(lt->t[i].categoria, categoria) == 0) {
+      fprintf(f, "\nLembrete %d:\n", i + 1);
+      fprintf(f, "Prioridade: %d\n", lt->t[i].prioridade);
+      fprintf(f, "Categoria: %s\n", lt->t[i].categoria);
+      fprintf(f, "Descricao: %s\n", lt->t[i].descricao);
+      fprintf(f, "Estado: %d\n", lt->t[i].estado);
+    }
+  }
+  fclose(f);
+  return 0;
+}
+
+int exportarTarefasPorPrioridadeECategoria(ListadeTarefas *lt){
+  FILE *f = fopen("exportar.txt", "w");
+  printf("\nExportar tarefas por prioridade e categoria\n");
+  int prioridade;
+  printf("\nDigite a prioridade: ");
+  scanf("%d", &prioridade);
+  printf("\nDigite a categoria: ");
+  char categoria[100];
+  int c;
+  while ((c = getchar()) != '\n' && c != EOF) { } //limpa o buffer
+  fgets(categoria, 100, stdin);
+  categoria[strcspn(categoria, "\n")] = '\0';
+  for (int i = 0; i < lt->qtd; i++) {
+    if (lt->t[i].prioridade == prioridade && strcmp(lt->t[i].categoria, categoria) == 0) {
+      fprintf(f, "\nLembrete %d:\n", i + 1);
+      fprintf(f, "Prioridade: %d\n", lt->t[i].prioridade);
+      fprintf(f, "Categoria: %s\n", lt->t[i].categoria);
+      fprintf(f, "Descricao: %s\n", lt->t[i].descricao);
+      fprintf(f, "Estado: %d\n", lt->t[i].estado);
+    }
+  }
+  fclose(f);
+  return 0;
+}
 
 void printMenu() { //imprime o menu com as opcoes
     printf("\nMenu:\n[1] Criar Tarefa\n[2] Deletar Tarefa\n[3] Listar Tarefas\n[4] Alterar Tarefa\n[5] Filtrar Tarefas Por Prioridade\n[6] Filtrar Tarefas Por Estado\n[7] Filtrar Tarefas Por Categoria\n[8] Filtrar Tarefas Por Prioridade E Categoria\n[9] Exportar Tarefas Por Prioridade\n[10] Exportar Tarefas Por Categoria\n[11] Exportar Tarefas Por Prioridade E Categoria\nEscolha uma opcao: ");
