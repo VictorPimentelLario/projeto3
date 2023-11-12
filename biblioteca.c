@@ -163,11 +163,11 @@ int filtrarTarefasPorCategoria(ListadeTarefas lt){ // Filtra as tarefas por cate
   printf("\nDigite a categoria: ");
   fgets(categoria, 100, stdin);
   categoria[strcspn(categoria, "\n")] = '\0';
-  for (int i = 0; i < lt.qtd; i++) { // percorre a lista de tarefas
-    for (int j = 10; j > -1; j--){ // percorre a lista de caracteres da categoria
+  for (int j = 10; j > -1; j--) { // percorre a lista de tarefas
+    for (int i = 0; i < lt.qtd; i++){ // percorre a lista de caracteres da categoria
       int CategoriaVerificar = strcmp(lt.t[i].categoria, categoria); // compara a categoria digitada com a categoria da tarefa
-      if (CategoriaVerificar == 0){ // se a categoria for igual, imprime a tarefa
-        if (lt.t[i].prioridade == j){ // se a prioridade da tarefa for igual a categoria, imprime a tarefa
+      if (lt.t[i].prioridade == j){ // se a categoria for igual, imprime a tarefa
+        if (CategoriaVerificar == 0){ // se a prioridade da tarefa for igual a categoria, imprime a tarefa
           printf("\nLembrete %d:\n", lt.t[i].numero);
           printf("Prioridade: %d\n", lt.t[i].prioridade);
           printf("Categoria: %s\n", lt.t[i].categoria);
@@ -235,17 +235,17 @@ int exportarTarefasPorCategoria(ListadeTarefas *lt){ // Exporta as tarefas por c
   printf("\nDigite a categoria: ");
   fgets(categoria, 100, stdin);
   categoria[strcspn(categoria, "\n")] = '\0';
-  for (int i = 0; i < lt->qtd; i++) { // percorre a lista de tarefas
-    for (int j = 10; j > -1; j--){ // percorre a lista de caracteres da categoria
+  for (int j = 10; j > -1; j--) { // percorre a lista de tarefas
+    for (int i = 0; i < lt->qtd; i++){ // percorre a lista de caracteres da categoria
       int CategoriaVerificar = strcmp(lt->t[i].categoria, categoria); // compara a categoria digitada com a categoria da tarefa
-      if (CategoriaVerificar == 0){ // se a categoria for igual, imprime a tarefa
-        if (lt->t[i].prioridade == j){ // se a prioridade da tarefa for igual a categoria, imprime a tarefa
+      if (lt->t[i].prioridade == j){ // se a categoria for igual, imprime a tarefa
+        if (CategoriaVerificar == 0){ // se a prioridade da tarefa for igual a categoria, imprime a tarefa
           if (lt->t[i].estado == 1) { // caso o estado seja igual a 1, mostra o estado como completo
-            fprintf(f,"Prioridade: %d | Categoria: %s | Estado: Completo | Descricao: %s", lt->t[i].prioridade, lt->t[i].categoria, , lt->t[i].descricao);
+            fprintf(f,"Prioridade: %d | Categoria: %s | Estado: Completo | Descricao: %s\n", lt->t[i].prioridade, lt->t[i].categoria, lt->t[i].descricao);
           } else if (lt->t[i].estado == 2) { // caso o estado seja igual a 2, mostra o estado como em andamento
-            fprintf(f,"Prioridade: %d | Categoria: %s | Estado: Em andamento | Descricao: %s", lt->t[i].prioridade, lt->t[i].categoria, , lt->t[i].descricao);
+            fprintf(f,"Prioridade: %d | Categoria: %s | Estado: Em andamento | Descricao: %s\n", lt->t[i].prioridade, lt->t[i].categoria,lt->t[i].descricao);
           } else if (lt->t[i].estado == 3) { // caso o estado seja igual a 3, mostra o estado como nao iniciado
-            fprintf(f,"Prioridade: %d | Categoria: %s | Estado: Nao iniciado | Descricao: %s", lt->t[i].prioridade, lt->t[i].categoria, , lt->t[i].descricao);
+            fprintf(f,"Prioridade: %d | Categoria: %s | Estado: Nao iniciado | Descricao: %s\n", lt->t[i].prioridade, lt->t[i].categoria,lt->t[i].descricao);
           }
         }
       }
