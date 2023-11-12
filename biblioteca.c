@@ -219,11 +219,7 @@ int exportarTarefasPorPrioridade(ListadeTarefas *lt) { // Exporta as tarefas por
   scanf("%d", &prioridade);
   for (int i = 0; i < lt->qtd; i++) { // percorre a lista de tarefas
     if (lt->t[i].prioridade == prioridade) { // se a prioridade da tarefa for igual a prioridade digitada, imprime a tarefa no arquivo
-      fprintf(f, "\nLembrete %d:\n", i + 1);
-      fprintf(f, "Prioridade: %d\n", lt->t[i].prioridade);
-      fprintf(f, "Categoria: %s\n", lt->t[i].categoria);
-      fprintf(f, "Descricao: %s\n", lt->t[i].descricao);
-      fprintf(f, "Estado: %d\n", lt->t[i].estado);
+      fprintf(f, "\n(Prioridade: %d) %s: %d | %s\n", lt->t[i].prioridade , lt->t[i].categoria , lt->t[i].estado ,lt->t[i].descricao);
     }
   }
   fclose(f); // fecha o arquivo
@@ -232,23 +228,29 @@ int exportarTarefasPorPrioridade(ListadeTarefas *lt) { // Exporta as tarefas por
 
 int exportarTarefasPorCategoria(ListadeTarefas *lt){ // Exporta as tarefas por categoria
   FILE *f = fopen("exportar.txt", "w"); // abre o arquivo exportar.txt para escrita
-  printf("\nExportar tarefas por categoria\n");
-  char categoria[100]; // variavel para armazenar a categoria digitada pelo usuario
-  printf("\nDigite a categoria: ");
+  printf("\nFiltra tarefas por Categoria\n");
   int c;
-  while ((c = getchar()) != '\n' && c != EOF) { } //limpa o buffer
+  char categoria[100]; // variavel para armazenar a categoria digitada pelo usuario
+  while ((c = getchar()) != '\n' && c != EOF) {} //limpa o buffer
+  printf("\nDigite a categoria: ");
   fgets(categoria, 100, stdin);
   categoria[strcspn(categoria, "\n")] = '\0';
   for (int i = 0; i < lt->qtd; i++) { // percorre a lista de tarefas
-    if (strcmp(lt->t[i].categoria, categoria) == 0) { // se a categoria da tarefa for igual a categoria digitada, imprime a tarefa no arquivo
-      fprintf(f, "\nLembrete %d:\n", i + 1);
-      fprintf(f, "Prioridade: %d\n", lt->t[i].prioridade);
-      fprintf(f, "Categoria: %s\n", lt->t[i].categoria);
-      fprintf(f, "Descricao: %s\n", lt->t[i].descricao);
-      fprintf(f, "Estado: %d\n", lt->t[i].estado);
+    for (int j = 10; j > -1; j--){ // percorre a lista de caracteres da categoria
+      int CategoriaVerificar = strcmp(lt->t[i].categoria, categoria); // compara a categoria digitada com a categoria da tarefa
+      if (CategoriaVerificar == 0){ // se a categoria for igual, imprime a tarefa
+        if (lt->t[i].prioridade == j){ // se a prioridade da tarefa for igual a categoria, imprime a tarefa
+          if (lt->t[i].estado == 1) { // caso o estado seja igual a 1, mostra o estado como completo
+            fprintf(f,"Prioridade: %d | Categoria: %s | Estado: Completo | Descricao: %s", lt->t[i].prioridade, lt->t[i].categoria, , lt->t[i].descricao);
+          } else if (lt->t[i].estado == 2) { // caso o estado seja igual a 2, mostra o estado como em andamento
+            fprintf(f,"Prioridade: %d | Categoria: %s | Estado: Em andamento | Descricao: %s", lt->t[i].prioridade, lt->t[i].categoria, , lt->t[i].descricao);
+          } else if (lt->t[i].estado == 3) { // caso o estado seja igual a 3, mostra o estado como nao iniciado
+            fprintf(f,"Prioridade: %d | Categoria: %s | Estado: Nao iniciado | Descricao: %s", lt->t[i].prioridade, lt->t[i].categoria, , lt->t[i].descricao);
+          }
+        }
+      }
     }
   }
-  fclose(f); // fecha o arquivo
   return 0;
 }
 
@@ -266,11 +268,7 @@ int exportarTarefasPorPrioridadeECategoria(ListadeTarefas *lt){ // Exporta as ta
   categoria[strcspn(categoria, "\n")] = '\0';
   for (int i = 0; i < lt->qtd; i++) { // percorre a lista de tarefas
     if (lt->t[i].prioridade == prioridade && strcmp(lt->t[i].categoria, categoria) == 0) { // se a prioridade da tarefa for igual a prioridade digitada e a categoria da tarefa for igual a categoria digitada, imprime a tarefa no arquivo
-      fprintf(f, "\nLembrete %d:\n", i + 1);
-      fprintf(f, "Prioridade: %d\n", lt->t[i].prioridade);
-      fprintf(f, "Categoria: %s\n", lt->t[i].categoria);
-      fprintf(f, "Descricao: %s\n", lt->t[i].descricao);
-      fprintf(f, "Estado: %d\n", lt->t[i].estado);
+      fprintf(f, "\n(Prioridade: %d) %s: %d | %s\n", lt->t[i].prioridade , lt->t[i].categoria , lt->t[i].estado ,lt->t[i].descricao);
     }
   }
   fclose(f); // fecha o arquivo
